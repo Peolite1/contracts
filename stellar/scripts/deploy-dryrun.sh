@@ -351,7 +351,7 @@ if $CLI contract invoke \
     --stealth-meta-address "$TEST_META_ADDRESS" 2>&1 | grep -qi "AlreadyRegistered"; then
     ok "duplicate name registration rejected (AlreadyRegistered)"
 else
-    warn "duplicate name registration not rejected with AlreadyRegistered"
+    smoke_fail "duplicate name registration not rejected with AlreadyRegistered"
 fi
 
 # 2. Resolve the name (Happy path)
@@ -384,7 +384,7 @@ if $CLI contract invoke \
     --name "doesnotexist123" 2>&1 | grep -qi "NotFound"; then
     ok "non-existent name resolution rejected (NotFound)"
 else
-    warn "non-existent name resolution not rejected with NotFound"
+    smoke_fail "non-existent name resolution not rejected with NotFound"
 fi
 
 # 3. Announce an event (Happy path)
@@ -418,7 +418,7 @@ if $CLI contract invoke \
     --metadata "$TEST_METADATA" 2>&1 | grep -qi "InvalidSchemeId"; then
     ok "invalid scheme ID rejected (InvalidSchemeId)"
 else
-    warn "invalid scheme ID not rejected with InvalidSchemeId"
+    smoke_fail "invalid scheme ID not rejected with InvalidSchemeId"
 fi
 
 # 4. Query the registry (Rejected / Happy path depending on state)
